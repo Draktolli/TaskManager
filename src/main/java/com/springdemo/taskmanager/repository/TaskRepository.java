@@ -7,7 +7,5 @@ import org.springframework.stereotype.Repository;
 import java.util.UUID;
 
 @Repository
-public interface TaskRepository extends JpaRepository<TaskEtity, UUID> {
-
-    List<TaskEtity> findAllById(UUID uuid);
+public interface TaskRepository extends JpaRepository<TaskEntity, UUID> {
 }
