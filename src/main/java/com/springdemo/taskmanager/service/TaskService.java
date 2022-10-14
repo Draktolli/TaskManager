@@ -1,6 +1,6 @@
 package com.springdemo.taskmanager.service;
 
-import com.springdemo.taskmanager.entity.TaskEtity;
+import com.springdemo.taskmanager.entity.TaskEntity;
 import com.springdemo.taskmanager.entity.TaskStatus;
 import com.springdemo.taskmanager.model.TaskModel;
 import com.springdemo.taskmanager.repository.TaskRepository;
