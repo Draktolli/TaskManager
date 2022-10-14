@@ -39,8 +39,7 @@ public class TaskManagerController {
     }
 
     @PutMapping("/task/{id}")
-    public TaskModel updateTask(@PathVariable("id") UUID id,
-                           @RequestParam(value = "taskStatus") TaskStatus taskStatus) {
+    public TaskModel updateTask(@PathVariable("id") UUID id, @RequestParam(value = "taskStatus") TaskStatus taskStatus) {
         return taskService.updateTask(id, taskStatus);
     }
 

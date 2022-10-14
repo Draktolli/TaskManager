@@ -12,41 +12,73 @@ import org.springframework.web.server.ResponseStatusException;
 import javax.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 @Service
 @AllArgsConstructor
 public class TaskService {
+
     private final TaskRepository taskRepository;
     private final TaskMapper taskMapper;
+
     public List<TaskModel> getAllTasks() {
+
         List<TaskModel> modelList = new ArrayList<>();
-        List<TaskEtity> taskEtities = taskRepository.findAll();
-        for (TaskEtity task :
-                taskEtities) {
+        List<TaskEntity> taskEtities = taskRepository.findAll();
+
+        for (TaskEntity task : taskEtities) {
+
             modelList.add(taskMapper.EntityToModel(task));
+
         }
+
         return modelList;
     }
-    public TaskModel getTaskByID(UUID id) {
-        return taskMapper.EntityToModel(taskRepository.findById(id).get());
+
+    public TaskModel getTaskByID(UUID id) throws Exception {
+
+        Optional<TaskEntity> task = taskRepository.findById(id);
+
+        if (task.isEmpty()) {
+            throw new Exception();
+        }
+
+        return taskMapper.EntityToModel(task.get());
     }
+
     @Transactional
     public TaskModel createTask(TaskModel taskModel) {
-        TaskEtity taskEtity;
+
+        TaskEntity taskEntity;
+
         try {
-            taskEtity = taskMapper.modelToEntity(taskModel);
+
+            taskEntity = taskMapper.modelToEntity(taskModel);
+
+            final TaskEntity createdTask = taskRepository.saveAndFlush(taskEntity);
+
+            return taskMapper.EntityToModel(createdTask);
+
         } catch (IllegalArgumentException e) {
+
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, e.getMessage());
         }
-        return taskMapper.EntityToModel(taskRepository.save(taskEtity));
     }
-    public void deleteTaskById (UUID id) {taskRepository.deleteById(id);}
+
+    public void deleteTaskById(UUID id) {
+        taskRepository.deleteById(id);
+    }
 
     public TaskModel updateTask(UUID id, TaskStatus taskStatus) {
-        TaskEtity task = taskRepository.findById(id).get();
+
+        TaskEntity task = taskRepository.findById(id).get();
+
         task.setTaskStatus(taskStatus);
-        return taskMapper.EntityToModel(taskRepository.save(task));
+
+        task = taskRepository.save(task);
+
+        return taskMapper.EntityToModel(task);
     }
 
 }

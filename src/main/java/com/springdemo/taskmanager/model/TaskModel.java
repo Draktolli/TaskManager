@@ -6,9 +6,7 @@ import javax.validation.constraints.NotBlank;
 import java.util.UUID;
 
 public record TaskModel (
-    UUID id,
-    @NotBlank
-    String content,
-    @NotBlank
-    TaskStatus taskStatus
-){ }
+        UUID id,
+        @NotBlank String content,
+        @NotBlank TaskStatus taskStatus
+) { }

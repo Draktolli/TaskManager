@@ -2,6 +2,7 @@ package com.springdemo.taskmanager.entity;
 
 import lombok.*;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -14,8 +15,11 @@ public class TaskEntity {
 
     @Id
     @GeneratedValue
+    @Column(columnDefinition = "uuid")
     private UUID id;
+
     private String content;
+
     private TaskStatus taskStatus;
 
     public TaskEntity(UUID id, String content, TaskStatus taskStatus) {
