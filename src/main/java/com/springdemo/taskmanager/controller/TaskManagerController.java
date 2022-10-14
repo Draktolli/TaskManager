@@ -19,7 +19,7 @@ public class TaskManagerController {
     }
 
     @GetMapping("/task/{id}")
-    public TaskModel getTaskById(@RequestParam UUID id) {
+    public TaskModel getTaskById(@PathVariable UUID id) throws Exception {
         return taskService.getTaskByID(id);
     }
 
@@ -33,8 +33,8 @@ public class TaskManagerController {
         return taskService.getAllTasks();
     }
 
-    @DeleteMapping("/Task/{id}")
-    public void deleteTask(@RequestParam UUID id) {
+    @DeleteMapping("/task/{id}")
+    public void deleteTask(@PathVariable UUID id) {
         taskService.deleteTaskById(id);
     }
 

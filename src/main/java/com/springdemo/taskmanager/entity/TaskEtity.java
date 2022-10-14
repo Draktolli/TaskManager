@@ -1,6 +1,7 @@
 package com.springdemo.taskmanager.entity;
 
 import lombok.*;
+import org.hibernate.annotations.Type;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
