@@ -1,8 +1,11 @@
 package com.springdemo.taskmanager.controller;
 
 import com.springdemo.taskmanager.entity.TaskStatus;
+import com.springdemo.taskmanager.entity.TaskStatusDTO;
 import com.springdemo.taskmanager.model.TaskModel;
 import com.springdemo.taskmanager.service.TaskService;
+import jdk.jfr.ContentType;
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -38,9 +41,9 @@ public class TaskManagerController {
         taskService.deleteTaskById(id);
     }
 
-    @PutMapping("/task/{id}")
-    public TaskModel updateTask(@PathVariable("id") UUID id, @RequestParam(value = "taskStatus") TaskStatus taskStatus) {
-        return taskService.updateTask(id, taskStatus);
+    @PutMapping(value = "/task/{id}")
+    public TaskModel updateTask(@PathVariable("id") UUID id, @RequestBody TaskStatusDTO taskStatus) {
+        return taskService.updateTask(id, taskStatus.getTaskStatus());
     }
 
 }
