@@ -1,11 +1,8 @@
 package com.springdemo.taskmanager.controller;
 
-import com.springdemo.taskmanager.entity.TaskStatus;
 import com.springdemo.taskmanager.entity.TaskStatusDTO;
 import com.springdemo.taskmanager.model.TaskModel;
 import com.springdemo.taskmanager.service.TaskService;
-import jdk.jfr.ContentType;
-import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -13,11 +10,11 @@ import java.util.UUID;
 
 
 @RestController
-public class TaskManagerController {
+public class TaskController {
 
     private final TaskService taskService;
 
-    public TaskManagerController(TaskService taskService) {
+    public TaskController(TaskService taskService) {
         this.taskService = taskService;
     }
 

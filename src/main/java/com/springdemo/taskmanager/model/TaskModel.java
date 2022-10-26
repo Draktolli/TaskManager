@@ -7,6 +7,8 @@ import java.util.UUID;
 
 public record TaskModel (
         UUID id,
+
+        UUID dashboard_id,
         @NotBlank String content,
         @NotBlank TaskStatus taskStatus
 ) { }
